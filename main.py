@@ -65,4 +65,11 @@ for job in info["jobs"]:
     st.markdown(f"- {job}")
 
 # 대표 직업 상세 소개
-if info["]()
+if info["highlight"]:
+    st.markdown("---")
+    st.markdown(f"## 🌟 대표 직업 자세히 보기: **{info['highlight']}**")
+    st.success(info["job_desc"])
+
+# 하단 링크
+st.markdown("---")
+st.caption("📌 MBTI 검사 링크: [16Personalities 공식 웹사이트](https://www.16personalities.com/ko)")
