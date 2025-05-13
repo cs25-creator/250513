@@ -21,7 +21,7 @@ mbti_types = [
 ]
 selected_mbti = st.selectbox("🔍 당신의 MBTI를 골라주세요:", mbti_types)
 
-# MBTI별 직업 추천 및 설명
+# MBTI별 직업 추천 및 설명 (일부만 예시로 작성)
 mbti_data = {
     "INFP": {
         "intro": "📖 깊은 감성의 중재자형 INFP!\n🌱 이상을 중시하고, 사람들의 감정을 섬세하게 읽는 당신은 세상을 따뜻하게 변화시킬 수 있어요.",
@@ -43,32 +43,30 @@ mbti_data = {
 - 논리적 사고력, 분석력, 커뮤니케이션 능력 필수
 - ENTJ의 냉철함과 추진력이 가장 잘 드러나는 직업!
 - 출장이 많고 긴 업무 시간, 경쟁이 심한 만큼 **성과 중심의 환경을 선호하는 유형**에게 적합"""
-    },
-    # 다른 MBTI도 동일한 형식으로 추가 가능
+    }
 }
 
-# 기본값 처리
-info = mbti_data.get(selected_mbti, {
-    "intro": "🚧 준비 중인 유형입니다!",
-    "jobs": [],
-    "highlight": "",
-    "job_desc": ""
-})
+# 안전한 데이터 접근
+if selected_mbti in mbti_data:
+    info = mbti_data[selected_mbti]
 
-# 성격 소개
-st.markdown("## 🎈 MBTI 성격 소개")
-st.info(info["intro"])
+    # 성격 소개
+    st.markdown("## 🎈 MBTI 성격 소개")
+    st.info(info["intro"])
 
-# 추천 직업 목록
-st.markdown("## 🧭 추천 직업 리스트")
-for job in info["jobs"]:
-    st.markdown(f"- {job}")
+    # 추천 직업 목록
+    st.markdown("## 🧭 추천 직업 리스트")
+    for job in info["jobs"]:
+        st.markdown(f"- {job}")
 
-# 대표 직업 상세 소개
-if info["highlight"]:
+    # 대표 직업 상세 소개
     st.markdown("---")
     st.markdown(f"## 🌟 대표 직업 자세히 보기: **{info['highlight']}**")
     st.success(info["job_desc"])
+
+else:
+    # 데이터 없는 MBTI 처리
+    st.warning("🚧 아직 이 MBTI 유형에 대한 정보가 준비되지 않았어요.\n조금만 기다려 주세요!")
 
 # 하단 링크
 st.markdown("---")
